@@ -1,114 +1,323 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
+<html lang="es">
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quintec Software</title>
-    <link href="https://fonts.googleapis.com/css2?family=Trend+Sans+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Trend+Sans+One&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
-    <div class="navbar">
-        <img src="/img/Logo.png" alt="Quintec Logo">
-        <span>Quintec Software</span>
+  <body>
+    <nav class="navbar" id="mainNavbar">
+      <div class="nav-brand">
+        <img src="/img/Logo.png" alt="Quintec Logo" />
+        <a href="index.html">Quintec Software</a>
+      </div>
+
+      <div class="nav-center">
+        <a href="index.html#cursos" class="nav-link">
+          <i class="fa-solid fa-laptop-code"></i> Cursos
+        </a>
+        <a href="index.html#retos" class="nav-link">
+          <i class="fa-solid fa-gamepad"></i> Retos
+        </a>
+        <a href="index.html#contacto" class="nav-link">
+          <i class="fa-solid fa-envelope"></i> Contacto
+        </a>
+      </div>
+    </nav>
+
+    <section class="main-landing-section" id="cursos">
+      <div class="hero-content-wrapper">
+        <div class="hero-text-container">
+          <h1>Aprende junto a nosotros</h1>
+          <h2>y emprende tu futuro</h2>
+          <p class="hero-subtitle">
+            Todo lo que necesitas aprender como programador en un sólo lugar
+          </p>
+          <button class="cta-button">EMPEZAR AHORA</button>
+        </div>
+
+        <div class="courses-container">
+          <h2 class="section-title">Nuestros Cursos</h2>
+          <div class="product-cards">
+            <div class="product-card">
+              <div class="icon-container">
+                <i class="fa-solid fa-code"></i>
+              </div>
+              <h3>JavaScript</h3>
+              <a
+                href="curso-javascript.html"
+                class="cta-button small"
+                style="
+                  text-decoration: none;
+                  display: inline-block;
+                  margin-top: auto;
+                "
+                >MÁS INFORMACIÓN</a
+              >
+            </div>
+            <div class="product-card">
+              <div class="icon-container">
+                <i class="fa-solid fa-swatchbook"></i>
+              </div>
+              <h3>Diseño UX/UI</h3>
+              <a
+                href="curso-uxui.html"
+                class="cta-button small"
+                style="
+                  text-decoration: none;
+                  display: inline-block;
+                  margin-top: auto;
+                "
+                >MÁS INFORMACIÓN</a
+              >
+            </div>
+            <div class="product-card">
+              <div class="icon-container">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <h3>Base de Datos</h3>
+              <a
+                href="curso-bd.html"
+                class="cta-button small"
+                style="
+                  text-decoration: none;
+                  display: inline-block;
+                  margin-top: auto;
+                "
+                >MÁS INFORMACIÓN</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="challenges-section" id="retos">
+      <h2>PON A PRUEBA TU LÓGICA</h2>
+      <p class="section-subtitle">Intenta completar los retos</p>
+
+      <div class="challenges-grid">
+        <div class="challenge-card code-challenge">
+          <div class="challenge-icon">
+            <i class="fa-solid fa-terminal"></i>
+          </div>
+          <div class="challenge-content">
+            <h3>Reto de Código</h3>
+            <p>Corrige el bug en este snippet de JavaScript y gana puntos.</p>
+            <button class="game-btn">JUGAR AHORA</button>
+          </div>
+        </div>
+
+        <div class="challenge-card quiz-challenge">
+          <div class="challenge-icon">
+            <i class="fa-solid fa-puzzle-piece"></i>
+          </div>
+          <div class="challenge-content">
+            <h3>Quiz Tech</h3>
+            <p>¿Cuánto sabes de CSS Grid? Responde en menos de 1 min.</p>
+            <button class="game-btn">EMPEZAR QUIZ</button>
+          </div>
+        </div>
+
+        <div class="challenge-card logic-challenge">
+          <div class="challenge-icon">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <div class="challenge-content">
+            <h3>Acertijo Lógico</h3>
+            <p>Entrena tu pensamiento computacional con este puzzle.</p>
+            <button class="game-btn">RESOLVER</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <footer class="modern-footer" id="contacto">
+      <div class="footer-container">
+        <div class="footer-col brand-col">
+          <h3>Quintec Software</h3>
+          <p>Transforma tu futuro ahora.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col links-col">
+          <h4>Explorar</h4>
+          <ul>
+            <li><a href="#cursos">Cursos</a></li>
+            <li><a href="#retos">Retos & Juegos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col contact-col">
+          <h4>Contacto</h4>
+          <div class="contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <span>quintecsoftware@gmail.com</span>
+          </div>
+          <div class="contact-item">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>+598 99 329 168</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2023 Quintec Software. Todos los derechos reservados.</p>
+      </div>
+    </footer> -->
+
+    <footer class="modern-footer" id="contacto">
+      <div class="footer-container">
+        <div class="footer-col brand-col">
+          <h3>Quintec Software<span class="dot">.</span></h3>
+          <p>
+            Formando a la próxima generación de líderes digitales con tecnología
+            de vanguardia.
+          </p>
+
+          <div class="contact-data">
+            <div class="contact-item">
+              <i class="fa-solid fa-envelope"></i>
+              <span>quintecsoftware@gmail.com</span>
+            </div>
+            <div class="contact-item">
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>+598 99 329 168</span>
+            </div>
+          </div>
+
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col links-col">
+          <h4>Explorar</h4>
+          <ul>
+            <li><a href="#cursos">Cursos</a></li>
+            <li><a href="#retos">Retos & Juegos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col form-col">
+          <h4>Envíanos un mensaje</h4>
+
+          <form
+            id="contactForm"
+            action="https://submit-form.com/23QjgD05b"
+            class="footer-form">
+            <div class="input-group">
+              <input type="text" name="name" placeholder="Tu Nombre" required />
+            </div>
+            <div class="input-group">
+              <input
+                type="email"
+                name="email"
+                placeholder="Tu Email"
+                required />
+            </div>
+            <div class="input-group">
+              <textarea
+                name="message"
+                rows="3"
+                placeholder="Escribe tu consulta..."
+                required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+              ENVIAR MENSAJE <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2023 Quintec Software. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <div id="modal-overlay" class="modal-overlay hidden"></div>
+
+    <div id="modal-code" class="game-modal hidden">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-code"></i> Bug Hunter</h3>
+        <button class="close-btn" onclick="closeModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Encuentra el error en la siguiente función:</p>
+        <div class="code-snippet">
+          <pre>
+function sumar(a, b) {
+    return a + b;
+}
+console.log(sumar(5, "5")); 
+// Actual: "55" | Esperado: 10
+</pre
+          >
+        </div>
+        <p class="question-text">¿Cuál es el problema?</p>
+        <div class="options-grid">
+          <button class="option-btn" onclick="checkCodeAnswer(this, false)">
+            Falta un punto y coma.
+          </button>
+          <button class="option-btn" onclick="checkCodeAnswer(this, true)">
+            Tipos de datos incorrectos (String vs Number).
+          </button>
+          <button class="option-btn" onclick="checkCodeAnswer(this, false)">
+            La función no tiene nombre.
+          </button>
+        </div>
+        <div id="code-feedback" class="feedback-msg"></div>
+      </div>
     </div>
 
-    <section class="hero">
-        <div class="hero-text">
-            <h1>AQUÍ PARA CONECTAR</h1>
-            <h2>Transformá tu futuro</h2>
-            <button>EMPEZAR AHORA</button>
+    <div id="modal-quiz" class="game-modal hidden">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-puzzle-piece"></i> CSS Grid Master</h3>
+        <button class="close-btn" onclick="closeModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="quiz-container">
+          <p id="quiz-question">Pregunta 1/3</p>
+          <h4 id="quiz-text">Cargando...</h4>
+          <div class="options-grid" id="quiz-options"></div>
         </div>
-        <div class="hero-images">
-            <img src="https://cdn-icons-png.flaticon.com/512/1052/1052640.png" alt="3D Icon 1" />
-            <img src="https://cdn-icons-png.flaticon.com/512/1052/1052637.png" alt="3D Icon 2" />
-            <img src="https://cdn-icons-png.flaticon.com/512/1052/1052636.png" alt="3D Icon 3" />
-            <img src="https://cdn-icons-png.flaticon.com/512/1052/1052644.png" alt="3D Icon 4" />
-        </div>
-    </section>
+        <div id="quiz-feedback" class="feedback-msg"></div>
+      </div>
+    </div>
 
-    <section class="products-section">
-        <h2>SERVICIOS</h2>
-        <div class="product-cards">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8" alt="Internet Plans" />
-                <h3>CLASES ONLINE</h3>
-                <button>FIND OUT MORE</button>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8" alt="Accessories" />
-                <h3>DESARROLLO WEB</h3>
-                <button>FIND OUT MORE</button>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8" alt="Bundles" />
-                <h3>E-COMMERCE</h3>
-                <button>FIND OUT MORE</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="faqs-section">
-        <h2>PREGUNTAS FRECUENTES</h2>
-        <div class="faq-items">
-            <div class="faq-item">
-                <h3>How will I know which internet plan is suitable for me?</h3>
-                <p>We provide guidance based on your needs to choose the perfect internet plan.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Does Quintec Software cover installation fees?</h3>
-                <p>Yes, we include all initial setup and guidance with your service.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Is customer service available 24/7?</h3>
-                <p>Our team is available round-the-clock to help you with anything you need.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="services-section">
-        <div class="services-left">
-            <h2>CLASES ONLINE</h2>
-            <img src="https://images.unsplash.com/photo-1542744095-fcf48d80b0fd" alt="Web Service" />
-        </div>
-        <div class="services-right">
-            <h3>PLAN BASICO</h3>
-            <p>Con un costo fijo mensual podras acceder 8 horas de clases al mes. Material de apoyo y consultas las 24 horas con AI guida por el docente y enfocada totalmente en el seguimiento del alumno.</p>
-            <h3>PREMIUM PLAN</h3>
-            <p>Con un costo fijo mensual podras acceder 8 horas de clases al mes. Material de apoyo y consultas las 24 horas con AI guida por el docente y enfocada totalmente en el seguimiento del alumno.</p>
-            <h3>GROUP PLAN</h3>
-            <p>Con un costo fijo mensual podras acceder 8 horas de clases al mes. Material de apoyo y consultas las 24 horas con AI guida por el docente y enfocada totalmente en el seguimiento del alumno.</p>
-            <button>COMPARAR PLANES</button>
-        </div>
-    </section>
-
-    <section class="footer-section">
-        <div class="footer-left">
-            <video autoplay loop muted playsinline>
-                <source src="/videos/bg-video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <div class="footer-right">
-            <h3>CONTACTO</h3>
-            <p><strong>Teléfono:</strong> (+598) 99 881 212</p>
-            <p><strong>Email:</strong> quintecsoftware@gmail.com</p>
-            <p><a href="#contact-form" style="color:#ff66d2; text-decoration:underline;">Escríbenos</a></p>
-            <h3>SOBRE NOSOTROS</h3>
-            <p>Creamos sitios web modernos, visualmente impresionantes y funcionales, adaptados a las necesidades de su negocio.</p>
-            <div class="social">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            </div>
-        </div>
-    </section>
+    <div id="modal-logic" class="game-modal hidden">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-brain"></i> Secuencia Lógica</h3>
+        <button class="close-btn" onclick="closeModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Completa la secuencia lógica:</p>
+        <h2 class="sequence-display">1, 1, 2, 3, 5, 8, ...</h2>
+        <p>¿Cuál es el siguiente número?</p>
+        <input
+          type="number"
+          id="logic-input"
+          placeholder="Tu respuesta..."
+          class="logic-input" />
+        <button class="cta-button small" onclick="checkLogic()">
+          Verificar
+        </button>
+        <div id="logic-feedback" class="feedback-msg"></div>
+      </div>
+    </div>
 
     <script src="app.js"></script>
-</body>
-
+  </body>
 </html>

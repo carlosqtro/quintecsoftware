@@ -1,5 +1,5 @@
 /* ==========================================================================
-   APP.JS - CÓDIGO FINAL QUINTEC SOFTWARE
+   APP.JS - CÓDIGO COMPLETO QUINTEC SOFTWARE
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -28,12 +28,13 @@ let currentQ = 0;
 let score = 0;
 
 /* --------------------------------------------------------------------------
-   2. FUNCIONES GLOBALES (Accesibles desde el HTML)
+   2. FUNCIONES GLOBALES (Accesibles desde el HTML via onclick)
    -------------------------------------------------------------------------- */
 
 // --- CONTROL DE MODALES ---
 function openModal(modal) {
   const overlay = document.getElementById("modal-overlay");
+  // Si pasamos el ID como string o el elemento directo
   const modalEl =
     typeof modal === "string" ? document.getElementById(modal) : modal;
 
@@ -42,6 +43,7 @@ function openModal(modal) {
   overlay.classList.remove("hidden");
   modalEl.classList.remove("hidden");
 
+  // Pequeño delay para permitir la transición CSS
   setTimeout(() => {
     overlay.classList.add("active");
     modalEl.classList.add("active");
@@ -63,7 +65,7 @@ function closeModals() {
       .querySelectorAll(".game-modal")
       .forEach((m) => m.classList.add("hidden"));
 
-    // Limpieza de estados
+    // Limpieza de estados al cerrar
     document
       .querySelectorAll(".feedback-msg")
       .forEach((f) => (f.innerHTML = ""));
@@ -75,7 +77,7 @@ function closeModals() {
   }, 300);
 }
 
-// --- JUEGOS ---
+// --- JUEGO 1: RETO DE CÓDIGO ---
 function checkCodeAnswer(btn, isCorrect) {
   const feedback = document.getElementById("code-feedback");
   if (isCorrect) {
@@ -89,6 +91,7 @@ function checkCodeAnswer(btn, isCorrect) {
   }
 }
 
+// --- JUEGO 2: QUIZ TECH ---
 function loadQuizQuestion() {
   currentQ = 0;
   score = 0;
@@ -125,6 +128,7 @@ function checkQuizAnswer(selected, correct) {
     currentQ++;
     showQuestion();
   } else {
+    // Fin del juego
     const optsDiv = document.getElementById("quiz-options");
     const tEl = document.getElementById("quiz-text");
     const qEl = document.getElementById("quiz-question");
@@ -143,12 +147,14 @@ function checkQuizAnswer(selected, correct) {
   }
 }
 
+// --- JUEGO 3: LÓGICA (FIBONACCI) ---
 function checkLogic() {
   const input = document.getElementById("logic-input");
   const feedback = document.getElementById("logic-feedback");
 
   if (!input || !feedback) return;
 
+  // Secuencia: 1, 1, 2, 3, 5, 8... (Fibonacci: 5+8 = 13)
   if (parseInt(input.value) === 13) {
     feedback.innerHTML =
       '<span style="color: #4ade80">¡Genio! Es la secuencia Fibonacci.</span>';
@@ -158,20 +164,20 @@ function checkLogic() {
   }
 }
 
-// --- ACORDEÓN ---
+// --- ACORDEÓN DE CURSOS (Para página de detalle) ---
 function toggleChapter(header) {
   const chapter = header.parentElement;
   if (chapter) chapter.classList.toggle("open");
 }
 
 /* --------------------------------------------------------------------------
-   3. INICIALIZACIÓN DEL DOM (Carga de página)
+   3. INICIALIZACIÓN DEL DOM (Se ejecuta al cargar la página)
    -------------------------------------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log("✅ DOM cargado. Inicializando Quintec Scripts...");
 
-  // 1. NAVBAR SCROLL
+  // --- A. NAVBAR SCROLL ---
   const navbar = document.getElementById("mainNavbar");
   if (navbar) {
     window.addEventListener("scroll", () => {
@@ -183,66 +189,33 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // 2. WHATSAPP INTELIGENTE (NUEVO)
-  // Detectamos los botones principales del Hero
-  const waButtons = document.querySelectorAll(
-    ".hero-text-container .cta-button, .action-area .cta-button"
-  );
-
-  waButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const phoneNumber = "59899329168"; // Tu número de Uruguay
-      let message =
-        "Hola Carlos, me gustaría saber más sobre las clases de Quintec."; // Mensaje por defecto
-
-      // Detectamos en qué página estamos para personalizar el mensaje
-      const title = document.title;
-
-      if (title.includes("Full Stack") || title.includes("Desarrollo Web")) {
-        message =
-          "Hola Carlos, estoy interesado en inscribirme al curso de *Desarrollo Web Full-Stack*.";
-      } else if (title.includes("UX/UI")) {
-        message =
-          "Hola Carlos, estoy interesado en inscribirme al curso de *Diseño UX/UI*.";
-      } else if (title.includes("Bases de Datos") || title.includes("SQL")) {
-        message =
-          "Hola Carlos, estoy interesado en inscribirme al curso de *Bases de Datos*.";
-      } else {
-        message =
-          "Hola Carlos, quiero empezar mi camino como programador con Quintec.";
-      }
-
-      // Abrir WhatsApp en nueva pestaña
-      const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-        message
-      )}`;
-      window.open(url, "_blank");
-    });
-  });
-
-  // 3. LISTENERS JUEGOS
+  // --- B. LISTENERS PARA ABRIR MODALES (Si existen los botones) ---
   const btnCode = document.querySelector(".code-challenge .game-btn");
   const btnQuiz = document.querySelector(".quiz-challenge .game-btn");
   const btnLogic = document.querySelector(".logic-challenge .game-btn");
-  const overlay = document.getElementById("modal-overlay");
 
+  // Overlay click para cerrar
+  const overlay = document.getElementById("modal-overlay");
   if (overlay) overlay.addEventListener("click", closeModals);
 
-  if (btnCode)
+  if (btnCode) {
     btnCode.addEventListener("click", () =>
       openModal(document.getElementById("modal-code"))
     );
-  if (btnQuiz)
+  }
+  if (btnQuiz) {
     btnQuiz.addEventListener("click", () => {
       openModal(document.getElementById("modal-quiz"));
       loadQuizQuestion();
     });
-  if (btnLogic)
+  }
+  if (btnLogic) {
     btnLogic.addEventListener("click", () =>
       openModal(document.getElementById("modal-logic"))
     );
+  }
 
-  // 4. SLIDER MOBILE
+  // --- C. SLIDER MOBILE (Auto-scroll inicial) ---
   const productCards = document.querySelector(".product-cards");
   if (window.innerWidth <= 768 && productCards) {
     const firstCard = productCards.querySelector(".product-card");
@@ -254,25 +227,31 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // 5. FORMULARIO DE CONTACTO (AJAX)
+  // --- D. FORMULARIO DE CONTACTO (SOLUCIÓN REDIRECCIÓN) ---
   const contactForm = document.getElementById("contactForm");
 
   if (contactForm) {
+    console.log("✅ Formulario de contacto detectado.");
+
     contactForm.addEventListener("submit", async function (e) {
-      e.preventDefault();
+      e.preventDefault(); // 1. Detiene la recarga de página
+      console.log("🚀 Enviando datos a Formspark...");
 
       const btn = this.querySelector(".submit-btn");
       const originalText = btn.innerHTML;
       const actionUrl = this.getAttribute("action");
 
+      // 2. Estado de carga visual
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
       btn.disabled = true;
       btn.style.opacity = "0.7";
 
+      // 3. Preparar datos como JSON
       const formData = new FormData(this);
       const data = Object.fromEntries(formData.entries());
 
       try {
+        // 4. Petición AJAX (Fetch)
         const response = await fetch(actionUrl, {
           method: "POST",
           headers: {
@@ -283,18 +262,20 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (response.ok) {
+          console.log("✅ Envío exitoso.");
           btn.innerHTML = '¡Enviado! <i class="fa-solid fa-check"></i>';
-          btn.style.background = "#4ade80";
+          btn.style.background = "#4ade80"; // Verde éxito
           btn.style.color = "#000";
           contactForm.reset();
         } else {
-          throw new Error("Error del servidor");
+          throw new Error("Error en la respuesta del servidor");
         }
       } catch (error) {
-        console.error("Error:", error);
+        console.error("❌ Error enviando:", error);
         btn.innerHTML = "Error. Intenta de nuevo.";
-        btn.style.background = "#f43f5e";
+        btn.style.background = "#f43f5e"; // Rojo error
       } finally {
+        // 5. Restaurar botón después de 3 segundos
         setTimeout(() => {
           btn.innerHTML = originalText;
           btn.style.background = "";
@@ -304,5 +285,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 3000);
       }
     });
+  } else {
+    // Log informativo (no es error) para páginas que no tienen formulario
+    // console.log("ℹ️ No se encontró formulario en esta página.");
   }
 });
