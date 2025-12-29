@@ -1,0 +1,244 @@
+
+        :root {
+            /* Colores Base - Dark UI */
+            --bg-color: #030712; /* Fondo casi negro */
+            --card-bg: #111827;  /* Gris muy oscuro */
+            --text-main: #F9FAFB;
+            --text-muted: #9CA3AF;
+            
+            /* Branding Quintec */
+            --brand-gradient: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);
+            --brand-solid: #EC4899;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .page {
+            width: 210mm;
+            height: 296mm; /* A4 */
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- PÁGINA 1: PORTADA (Mantenemos el diseño Midu que gustó) --- */
+        .cover {
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 60px;
+        }
+
+        .ambient-light {
+            position: absolute;
+            top: -150px; left: 50%;
+            transform: translateX(-50%);
+            width: 600px; height: 400px;
+            background: radial-gradient(circle, rgba(139,92,246,0.6) 0%, rgba(236,72,153,0.3) 40%, transparent 70%);
+            filter: blur(80px); z-index: 0; opacity: 0.8;
+        }
+
+        .hero-section {
+            position: relative; z-index: 10;
+            text-align: center; padding: 0 30px;
+            margin-top: 40px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .brand-pill {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 20px; border-radius: 50px;
+            font-size: 0.9rem; font-weight: 600; color: #E5E7EB;
+            margin-bottom: 30px;
+        }
+        .brand-dot { width: 8px; height: 8px; background: #EC4899; border-radius: 50%; box-shadow: 0 0 10px #EC4899; }
+
+        .hero-title {
+            font-size: 4.8rem; font-weight: 900; line-height: 1.1; letter-spacing: -2px;
+            margin-bottom: 25px;
+            background: linear-gradient(to bottom, #ffffff 60%, #9CA3AF 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem; color: var(--text-muted); max-width: 600px;
+            line-height: 1.5; font-weight: 300; margin-bottom: 60px;
+        }
+
+        .tech-showcase {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+            width: 100%; max-width: 700px;
+            margin-top: auto; margin-bottom: 80px; z-index: 10;
+        }
+
+        .tech-card {
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px; padding: 25px;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            height: 160px; position: relative; overflow: hidden;
+        }
+        .tech-card::before {
+            content: ''; position: absolute; top: -50px; right: -50px; width: 100px; height: 100px;
+            background: var(--brand-gradient); filter: blur(40px); opacity: 0.4;
+        }
+        .tech-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; position: relative; z-index: 2; }
+        .tech-card p { font-size: 0.9rem; color: var(--text-muted); position: relative; z-index: 2; }
+        .tech-card.wide {
+            grid-column: span 2; height: 140px;
+            background: linear-gradient(to right, rgba(17, 24, 39, 0.9), rgba(139, 92, 246, 0.1));
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        /* Footer General */
+        .footer {
+            position: absolute; bottom: 30px; width: 100%; text-align: center;
+            font-size: 0.9rem; color: var(--text-muted);
+            border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; z-index: 10;
+        }
+
+        /* --- PÁGINA 2: PRECIOS (Ajuste de altura) --- */
+        .page-content {
+            padding: 50px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            /* Eliminado justify-content: space-between para que no estire */
+        }
+
+        .page-header { margin-bottom: 40px; border-left: 5px solid #EC4899; padding-left: 20px; }
+        .page-header h2 { font-size: 2.5rem; margin-bottom: 5px; }
+
+        .grid-prices {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            /* Eliminado flex-grow: 1 para que no ocupe todo el alto */
+            align-items: start; /* Las cajas se alinean arriba */
+        }
+
+        .price-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255,255,255,0.05);
+            /* Altura automática según contenido */
+            height: auto; 
+        }
+
+        .price-card.featured {
+            background: linear-gradient(160deg, #1f2937 0%, #111827 100%);
+            border: 1px solid rgba(236, 72, 153, 0.5);
+            position: relative; overflow: hidden;
+        }
+        .price-card.featured::before {
+            content: ''; position: absolute; top:0; left:0; width:100%; height:4px;
+            background: var(--brand-gradient);
+        }
+
+        .card-head { text-align: center; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; }
+        .price-big { font-size: 3rem; font-weight: 800; color: var(--text-main); margin-top: 5px; }
+        .featured .price-big { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .table-rows { width: 100%; border-collapse: collapse; }
+        .table-rows td { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .pill-discount { background: var(--brand-gradient); color: white; padding: 3px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: bold; }
+
+        /* --- PÁGINA 3: FLUJO / TIMELINE --- */
+        .timeline-container {
+            margin-top: 30px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        /* Línea vertical conectora */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 10px; bottom: 50px;
+            left: 39px; /* Posición de la línea */
+            width: 2px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .timeline-step {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 45px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 40px; height: 40px;
+            background: var(--card-bg);
+            border: 2px solid #EC4899;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; color: #EC4899;
+            z-index: 2; /* Encima de la línea */
+            flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.2);
+        }
+
+        .step-content {
+            background: rgba(255,255,255,0.03);
+            padding: 20px 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            width: 100%;
+        }
+        
+        /* Flechita apuntando al paso */
+        .step-content::before {
+            content: ''; position: absolute; left: 60px; top: 15px;
+            border-width: 8px; border-style: solid;
+            border-color: transparent rgba(255,255,255,0.05) transparent transparent;
+        }
+
+        .step-title {
+            font-size: 1.1rem; font-weight: 700; color: white; margin-bottom: 8px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .step-text {
+            color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;
+        }
+
+        .highlight-box {
+            background: rgba(236, 72, 153, 0.1);
+            color: #ff8ec3;
+            padding: 10px; border-radius: 8px;
+            margin-top: 10px; font-size: 0.85rem;
+            border-left: 3px solid #EC4899;
+        }
+
+        .cta-final {
+            margin-top: auto;
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border-radius: 16px; border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        @media print { body { background: none; padding: 0; } .page { break-after: page; } }
