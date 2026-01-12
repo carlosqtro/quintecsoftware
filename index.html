@@ -5,188 +5,648 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quintec Software</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Trend+Sans+One&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap"
       rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      :root {
+        --bg-body: #0f172a;
+        --bg-card: #1e293b;
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+        --brand-gradient: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+        --accent: #ec4899;
+        --nav-height: 70px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #030712;
+        color: var(--text-main);
+        line-height: 1.6;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: 0.3s;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /* --- NAVBAR MODIFICADO (CENTRADO) --- */
+      .navbar {
+        display: flex;
+        /* CAMBIO: Centramos el contenido directo (nav-center) */
+        justify-content: center;
+        align-items: center;
+        padding: 0 5%;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: var(--nav-height);
+        z-index: 1000;
+        background: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        /* CAMBIO: Posición absoluta para fijarlo a la izquierda sin afectar el centro */
+        position: absolute;
+        left: 5%;
+      }
+
+      .nav-brand img {
+        height: 28px;
+        width: auto;
+      }
+
+      .nav-center {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-link {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-link:hover {
+        color: #fff;
+        text-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+      }
+
+      /* --- BOTONES --- */
+      .cta-button {
+        display: inline-block;
+        background: var(--brand-gradient);
+        color: #fff;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        transition: transform 0.2s, opacity 0.2s;
+        font-size: 0.9rem;
+      }
+      .cta-button:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+      }
+      .cta-button.small {
+        padding: 8px 20px;
+        font-size: 0.8rem;
+        width: 100%;
+        text-align: center;
+      }
+
+      /* --- CONFIGURACIÓN DE SECCIONES --- */
+      section {
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        padding: 80px 20px;
+      }
+
+      .container {
+        max-width: 1100px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 10px;
+        font-weight: 800;
+      }
+      .section-subtitle {
+        text-align: center;
+        color: var(--text-muted);
+        margin-bottom: 50px;
+        font-size: 1.1rem;
+      }
+
+      /* --- HERO SECTION (FULL SCREEN) --- */
+      .hero-section {
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        background: radial-gradient(
+          circle at top center,
+          rgba(139, 92, 246, 0.2) 0%,
+          rgba(3, 7, 18, 0) 60%
+        );
+        padding-top: var(--nav-height);
+      }
+
+      .hero-title {
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+      .text-gradient {
+        background: var(--brand-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero-desc {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        max-width: 600px;
+        margin: 0 auto 40px;
+      }
+
+      /* --- CARDS GRID --- */
+      .grid-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        width: 100%;
+      }
+      .card {
+        background: var(--bg-card);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 30px;
+        transition: transform 0.3s, border-color 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        height: 100%; /* Para alinear botones */
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(236, 72, 153, 0.4);
+      }
+      .icon-circle {
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--accent);
+        margin-bottom: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .card h3 {
+        margin-bottom: 10px;
+        font-size: 1.3rem;
+      }
+      .card p {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin-bottom: 20px;
+      }
+
+      /* Alineación de botones al fondo */
+      .card .cta-button {
+        margin-top: auto;
+      }
+
+      /* --- FOOTER FULL WIDTH --- */
+      .site-footer {
+        width: 100%;
+        background: #020617;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        color: var(--text-muted);
+        position: relative;
+        z-index: 20;
+        margin-top: auto;
+      }
+
+      .footer-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 80px 20px 40px 20px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr 1fr 1.2fr;
+        gap: 40px;
+        margin-bottom: 60px;
+      }
+
+      .footer-col h4 {
+        color: #fff;
+        margin-bottom: 25px;
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+
+      .footer-col p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .footer-col ul li {
+        margin-bottom: 12px;
+      }
+      .footer-col ul li a {
+        transition: color 0.3s;
+        font-size: 0.95rem;
+        color: var(--text-muted);
+      }
+      .footer-col ul li a:hover {
+        color: var(--accent);
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+      .social-icons a {
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: #fff;
+        transition: 0.3s;
+      }
+      .social-icons a:hover {
+        background: var(--accent);
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 15px;
+        font-size: 0.95rem;
+      }
+      .contact-item i {
+        color: var(--accent);
+        width: 20px;
+      }
+
+      /* Formulario Footer */
+      .footer-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .footer-form input,
+      .footer-form textarea {
+        width: 100%;
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: #fff;
+        font-family: inherit;
+        font-size: 0.9rem;
+      }
+      .footer-form input:focus,
+      .footer-form textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .submit-btn {
+        background: transparent;
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: 0.3s;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+      }
+      .submit-btn:hover {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        font-size: 0.85rem;
+        opacity: 0.6;
+      }
+
+      /* --- MODALES --- */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+        z-index: 2000;
+        display: none;
+      }
+      .game-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--bg-card);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 500px;
+        z-index: 2001;
+        display: none;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      }
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 10px;
+      }
+      .close-btn {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* Utils JS */
+      .hidden {
+        display: none !important;
+      }
+      .feedback-msg {
+        margin-top: 15px;
+        font-weight: bold;
+      }
+      .code-snippet {
+        background: #111;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: monospace;
+        margin: 15px 0;
+        border: 1px solid #333;
+        text-align: left;
+      }
+      .options-grid {
+        display: grid;
+        gap: 10px;
+      }
+      .option-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: none;
+        color: #ddd;
+        padding: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        text-align: left;
+      }
+      .option-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .logic-input {
+        width: 100%;
+        padding: 10px;
+        background: #111;
+        border: 1px solid #333;
+        color: #fff;
+        margin-bottom: 10px;
+        border-radius: 5px;
+      }
+
+      @media (max-width: 900px) {
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 768px) {
+        .nav-center {
+          display: none;
+        }
+        section {
+          padding: 60px 20px;
+        }
+        /* Footer Movil */
+        .footer-grid {
+          grid-template-columns: 1fr;
+          text-align: center;
+          gap: 50px;
+        }
+        .footer-col {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .social-icons {
+          justify-content: center;
+        }
+        .contact-item {
+          justify-content: center;
+        }
+        .footer-form {
+          width: 100%;
+        }
+      }
+    </style>
   </head>
 
   <body>
     <nav class="navbar" id="mainNavbar">
       <div class="nav-brand">
-        <img src="/img/Logo.png" alt="Quintec Logo" />
+        <img src="img/logo.png" alt="Quintec Logo" />
         <a href="index.html">Quintec Software</a>
       </div>
 
       <div class="nav-center">
-        <a href="index.html#cursos" class="nav-link">
-          <i class="fa-solid fa-laptop-code"></i> Cursos
-        </a>
-        <a href="index.html#retos" class="nav-link">
-          <i class="fa-solid fa-gamepad"></i> Retos
-        </a>
-        <a href="index.html#contacto" class="nav-link">
-          <i class="fa-solid fa-envelope"></i> Contacto
-        </a>
+        <a href="#cursos" class="nav-link"
+          ><i class="fa-solid fa-laptop-code"></i> Cursos</a
+        >
+        <a href="#retos" class="nav-link"
+          ><i class="fa-solid fa-gamepad"></i> Retos</a
+        >
+        <a href="#contacto" class="nav-link"
+          ><i class="fa-solid fa-envelope"></i> Contacto</a
+        >
       </div>
     </nav>
 
-    <section class="main-landing-section" id="cursos">
-      <div class="hero-content-wrapper">
-        <div class="hero-text-container">
-          <h1>Aprende junto a nosotros</h1>
-          <h2>y emprende tu futuro</h2>
-          <p class="hero-subtitle">
-            Todo lo que necesitas aprender como programador en un sólo lugar
-          </p>
-          <button class="cta-button">EMPEZAR AHORA</button>
-        </div>
+    <section class="hero-section">
+      <div class="container">
+        <h1 class="hero-title">
+          Aprende junto a nosotros<br /><span class="text-gradient"
+            >y emprende tu futuro</span
+          >
+        </h1>
+        <p class="hero-desc">
+          Todo lo que necesitas aprender como programador en un sólo lugar.
+          Metodología práctica y moderna.
+        </p>
+        <a href="#cursos" class="cta-button">EMPEZAR AHORA</a>
+      </div>
+    </section>
 
-        <div class="courses-container">
-          <h2 class="section-title">Nuestros Cursos</h2>
-          <div class="product-cards">
-            <div class="product-card">
-              <div class="icon-container">
-                <i class="fa-solid fa-code"></i>
-              </div>
-              <h3>JavaScript</h3>
-              <a
-                href="curso-javascript.html"
-                class="cta-button small"
-                style="
-                  text-decoration: none;
-                  display: inline-block;
-                  margin-top: auto;
-                "
-                >MÁS INFORMACIÓN</a
-              >
+    <section id="cursos">
+      <div class="container">
+        <h2 class="section-title">Nuestros Cursos</h2>
+        <p class="section-subtitle">Formación especializada en tecnología</p>
+
+        <div class="grid-cards">
+          <div class="card">
+            <div class="icon-circle"><i class="fa-brands fa-js"></i></div>
+            <h3>JavaScript</h3>
+            <p>Domina el lenguaje de la web. Desde cero hasta avanzado.</p>
+            <a href="curso-javascript.html" class="cta-button small"
+              >MÁS INFORMACIÓN</a
+            >
+          </div>
+
+          <div class="card">
+            <div class="icon-circle">
+              <i class="fa-solid fa-swatchbook"></i>
             </div>
-            <div class="product-card">
-              <div class="icon-container">
-                <i class="fa-solid fa-swatchbook"></i>
-              </div>
-              <h3>Diseño UX/UI</h3>
-              <a
-                href="curso-uxui.html"
-                class="cta-button small"
-                style="
-                  text-decoration: none;
-                  display: inline-block;
-                  margin-top: auto;
-                "
-                >MÁS INFORMACIÓN</a
-              >
-            </div>
-            <div class="product-card">
-              <div class="icon-container">
-                <i class="fa-solid fa-chart-line"></i>
-              </div>
-              <h3>Base de Datos</h3>
-              <a
-                href="curso-bd.html"
-                class="cta-button small"
-                style="
-                  text-decoration: none;
-                  display: inline-block;
-                  margin-top: auto;
-                "
-                >MÁS INFORMACIÓN</a
-              >
-            </div>
+            <h3>Diseño UX/UI</h3>
+            <p>
+              Crea interfaces modernas y experiencias de usuario increíbles.
+            </p>
+            <a href="curso-uxui.html" class="cta-button small"
+              >MÁS INFORMACIÓN</a
+            >
+          </div>
+
+          <div class="card">
+            <div class="icon-circle"><i class="fa-solid fa-database"></i></div>
+            <h3>Base de Datos</h3>
+            <p>Aprende SQL y gestión eficiente de datos.</p>
+            <a href="curso-bd.html" class="cta-button small">MÁS INFORMACIÓN</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="challenges-section" id="retos">
-      <h2>PON A PRUEBA TU LÓGICA</h2>
-      <p class="section-subtitle">Intenta completar los retos</p>
+    <section id="retos">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="text-gradient">ZONA DE RETOS</span>
+        </h2>
+        <p class="section-subtitle">
+          Pon a prueba tu lógica y gana experiencia
+        </p>
 
-      <div class="challenges-grid">
-        <div class="challenge-card code-challenge">
-          <div class="challenge-icon">
-            <i class="fa-solid fa-terminal"></i>
+        <div class="grid-cards">
+          <div class="card" style="border-color: rgba(56, 189, 248, 0.3)">
+            <div class="icon-circle" style="color: #38bdf8">
+              <i class="fa-solid fa-terminal"></i>
+            </div>
+            <h3>Bug Hunter</h3>
+            <p>Encuentra el error en el código JavaScript.</p>
+            <button
+              class="cta-button small"
+              style="background: linear-gradient(135deg, #0ea5e9, #3b82f6)"
+              onclick="openModal('modal-code')">
+              JUGAR AHORA
+            </button>
           </div>
-          <div class="challenge-content">
-            <h3>Reto de Código</h3>
-            <p>Corrige el bug en este snippet de JavaScript y gana puntos.</p>
-            <button class="game-btn">JUGAR AHORA</button>
-          </div>
-        </div>
 
-        <div class="challenge-card quiz-challenge">
-          <div class="challenge-icon">
-            <i class="fa-solid fa-puzzle-piece"></i>
-          </div>
-          <div class="challenge-content">
+          <div class="card" style="border-color: rgba(168, 85, 247, 0.3)">
+            <div class="icon-circle" style="color: #a855f7">
+              <i class="fa-solid fa-puzzle-piece"></i>
+            </div>
             <h3>Quiz Tech</h3>
-            <p>¿Cuánto sabes de CSS Grid? Responde en menos de 1 min.</p>
-            <button class="game-btn">EMPEZAR QUIZ</button>
+            <p>¿Cuánto sabes de CSS Grid? Responde rápido.</p>
+            <button
+              class="cta-button small"
+              style="background: linear-gradient(135deg, #8b5cf6, #6366f1)"
+              onclick="openModal('modal-quiz')">
+              EMPEZAR QUIZ
+            </button>
           </div>
-        </div>
 
-        <div class="challenge-card logic-challenge">
-          <div class="challenge-icon">
-            <i class="fa-solid fa-brain"></i>
-          </div>
-          <div class="challenge-content">
-            <h3>Acertijo Lógico</h3>
-            <p>Entrena tu pensamiento computacional con este puzzle.</p>
-            <button class="game-btn">RESOLVER</button>
+          <div class="card" style="border-color: rgba(236, 72, 153, 0.3)">
+            <div class="icon-circle" style="color: #ec4899">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <h3>Lógica Pura</h3>
+            <p>Entrena tu pensamiento computacional.</p>
+            <button
+              class="cta-button small"
+              style="background: linear-gradient(135deg, #ec4899, #f43f5e)"
+              onclick="openModal('modal-logic')">
+              RESOLVER
+            </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- <footer class="modern-footer" id="contacto">
-      <div class="footer-container">
-        <div class="footer-col brand-col">
-          <h3>Quintec Software</h3>
-          <p>Transforma tu futuro ahora.</p>
-          <div class="social-icons">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-github"></i></a>
+    <footer class="site-footer" id="contacto">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>Quintec Software</h4>
+            <p style="color: var(--text-muted)">
+              Formando a la próxima generación de líderes digitales.
+            </p>
+            <div class="social-icons">
+              <!-- <a href="#"><i class="fa-brands fa-instagram"></i></a> -->
+              <a href="https://github.com/carlosqtro"
+                ><i class="fa-brands fa-github"></i
+              ></a>
+              <!-- <a href="#"><i class="fa-brands fa-linkedin-in"></i></a> -->
+            </div>
           </div>
-        </div>
 
-        <div class="footer-col links-col">
-          <h4>Explorar</h4>
-          <ul>
-            <li><a href="#cursos">Cursos</a></li>
-            <li><a href="#retos">Retos & Juegos</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col contact-col">
-          <h4>Contacto</h4>
-          <div class="contact-item">
-            <i class="fa-solid fa-envelope"></i>
-            <span>quintecsoftware@gmail.com</span>
+          <div class="footer-col">
+            <h4>Explorar</h4>
+            <ul>
+              <li><a href="#cursos">Cursos</a></li>
+              <li><a href="#retos">Retos</a></li>
+              <!-- <li><a href="precios.html">Ver Precios</a></li> -->
+            </ul>
           </div>
-          <div class="contact-item">
-            <i class="fa-brands fa-whatsapp"></i>
-            <span>+598 99 329 168</span>
-          </div>
-        </div>
-      </div>
 
-      <div class="footer-bottom">
-        <p>&copy; 2023 Quintec Software. Todos los derechos reservados.</p>
-      </div>
-    </footer> -->
-
-    <footer class="modern-footer" id="contacto">
-      <div class="footer-container">
-        <div class="footer-col brand-col">
-          <h3>Quintec Software<span class="dot">.</span></h3>
-          <p>
-            Formando a la próxima generación de líderes digitales con tecnología
-            de vanguardia.
-          </p>
-
-          <div class="contact-data">
+          <div class="footer-col">
+            <h4>Contacto</h4>
             <div class="contact-item">
               <i class="fa-solid fa-envelope"></i>
               <span>quintecsoftware@gmail.com</span>
@@ -195,61 +655,43 @@
               <i class="fa-brands fa-whatsapp"></i>
               <span>+598 99 329 168</span>
             </div>
-          </div>
-
-          <div class="social-icons">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-github"></i></a>
-          </div>
-        </div>
-
-        <div class="footer-col links-col">
-          <h4>Explorar</h4>
-          <ul>
-            <li><a href="#cursos">Cursos</a></li>
-            <li><a href="#retos">Retos & Juegos</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col form-col">
-          <h4>Envíanos un mensaje</h4>
-
-          <form
-            id="contactForm"
-            action="https://submit-form.com/23QjgD05b"
-            class="footer-form">
-            <div class="input-group">
-              <input type="text" name="name" placeholder="Tu Nombre" required />
+            <div class="contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Montevideo, Uruguay</span>
             </div>
-            <div class="input-group">
+          </div>
+
+          <div class="footer-col">
+            <h4>Escríbenos</h4>
+            <form
+              id="contactForm"
+              action="https://submit-form.com/23QjgD05b"
+              class="footer-form">
+              <input type="text" name="name" placeholder="Tu Nombre" required />
               <input
                 type="email"
                 name="email"
                 placeholder="Tu Email"
                 required />
-            </div>
-            <div class="input-group">
               <textarea
                 name="message"
-                rows="3"
-                placeholder="Escribe tu consulta..."
+                rows="2"
+                placeholder="Mensaje..."
                 required></textarea>
-            </div>
-            <button type="submit" class="submit-btn">
-              ENVIAR MENSAJE <i class="fa-solid fa-paper-plane"></i>
-            </button>
-          </form>
+              <button type="submit" class="submit-btn">ENVIAR MENSAJE</button>
+            </form>
+          </div>
         </div>
-      </div>
 
-      <div class="footer-bottom">
-        <p>&copy; 2023 Quintec Software. Todos los derechos reservados.</p>
+        <div class="copyright">
+          &copy; 2026 Quintec Software. Todos los derechos reservados.
+        </div>
       </div>
     </footer>
 
-    <div id="modal-overlay" class="modal-overlay hidden"></div>
+    <div id="modal-overlay" class="modal-overlay" onclick="closeModals()"></div>
 
-    <div id="modal-code" class="game-modal hidden">
+    <div id="modal-code" class="game-modal">
       <div class="modal-header">
         <h3><i class="fa-solid fa-code"></i> Bug Hunter</h3>
         <button class="close-btn" onclick="closeModals()">&times;</button>
@@ -266,7 +708,7 @@ console.log(sumar(5, "5"));
 </pre
           >
         </div>
-        <p class="question-text">¿Cuál es el problema?</p>
+        <p style="margin-bottom: 15px">¿Cuál es el problema?</p>
         <div class="options-grid">
           <button class="option-btn" onclick="checkCodeAnswer(this, false)">
             Falta un punto y coma.
@@ -282,30 +724,36 @@ console.log(sumar(5, "5"));
       </div>
     </div>
 
-    <div id="modal-quiz" class="game-modal hidden">
+    <div id="modal-quiz" class="game-modal">
       <div class="modal-header">
         <h3><i class="fa-solid fa-puzzle-piece"></i> CSS Grid Master</h3>
         <button class="close-btn" onclick="closeModals()">&times;</button>
       </div>
       <div class="modal-body">
         <div id="quiz-container">
-          <p id="quiz-question">Pregunta 1/3</p>
-          <h4 id="quiz-text">Cargando...</h4>
+          <p
+            id="quiz-question"
+            style="color: var(--accent); margin-bottom: 10px">
+            Pregunta 1/3
+          </p>
+          <h4 id="quiz-text" style="margin-bottom: 20px">Cargando...</h4>
           <div class="options-grid" id="quiz-options"></div>
         </div>
         <div id="quiz-feedback" class="feedback-msg"></div>
       </div>
     </div>
 
-    <div id="modal-logic" class="game-modal hidden">
+    <div id="modal-logic" class="game-modal">
       <div class="modal-header">
         <h3><i class="fa-solid fa-brain"></i> Secuencia Lógica</h3>
         <button class="close-btn" onclick="closeModals()">&times;</button>
       </div>
       <div class="modal-body">
         <p>Completa la secuencia lógica:</p>
-        <h2 class="sequence-display">1, 1, 2, 3, 5, 8, ...</h2>
-        <p>¿Cuál es el siguiente número?</p>
+        <h2 style="text-align: center; margin: 20px 0; color: var(--accent)">
+          1, 1, 2, 3, 5, 8, ...
+        </h2>
+        <p style="margin-bottom: 10px">¿Cuál es el siguiente número?</p>
         <input
           type="number"
           id="logic-input"
@@ -319,5 +767,18 @@ console.log(sumar(5, "5"));
     </div>
 
     <script src="app.js"></script>
+
+    <script>
+      function openModal(id) {
+        document.getElementById("modal-overlay").style.display = "block";
+        document.getElementById(id).style.display = "block";
+      }
+      function closeModals() {
+        document.getElementById("modal-overlay").style.display = "none";
+        document
+          .querySelectorAll(".game-modal")
+          .forEach((m) => (m.style.display = "none"));
+      }
+    </script>
   </body>
 </html>

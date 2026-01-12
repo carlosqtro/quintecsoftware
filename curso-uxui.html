@@ -3,172 +3,547 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Diseño UX/UI - Quintec</title>
+    <title>Diseño UX/UI Profesional - Quintec</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Trend+Sans+One&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap"
       rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      /* --- VARIABLES Y RESET (SISTEMA DE DISEÑO QUINTEC) --- */
+      :root {
+        --bg-body: #0f172a;
+        --bg-card: #1e293b;
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+        --brand-gradient: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+        --accent: #ec4899;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #030712;
+        color: var(--text-main);
+        line-height: 1.6;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: 0.3s;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /* --- BOTÓN FLOTANTE: VOLVER AL INICIO --- */
+      .back-home-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1000;
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 10px 20px;
+        border-radius: 50px;
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+      .back-home-btn:hover {
+        background: var(--brand-gradient);
+        transform: translateY(-2px);
+        border-color: transparent;
+      }
+
+      /* --- CONTENEDOR CENTRAL --- */
+      .container {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* --- HEADER COMPACTO --- */
+      .course-header {
+        text-align: center;
+        padding-top: 120px;
+        padding-bottom: 60px;
+        background: radial-gradient(
+          circle at top center,
+          rgba(236, 72, 153, 0.15) 0%,
+          transparent 70%
+        ); /* Tinte rosa para UX */
+      }
+
+      .badge {
+        display: inline-block;
+        background: rgba(236, 72, 153, 0.15);
+        color: var(--accent);
+        padding: 6px 16px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        border: 1px solid rgba(236, 72, 153, 0.3);
+        letter-spacing: 1px;
+      }
+
+      .hero-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+      .text-gradient {
+        background: var(--brand-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero-desc {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        max-width: 700px;
+        margin: 0 auto 30px;
+      }
+
+      /* Instructor Pill */
+      .instructor-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 6px 20px 6px 6px;
+        border-radius: 50px;
+        margin-bottom: 30px;
+      }
+      .instructor-pill img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2px solid var(--accent);
+      }
+      .inst-info {
+        text-align: left;
+        line-height: 1.2;
+        font-size: 0.9rem;
+      }
+      .inst-info span {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        display: block;
+      }
+
+      /* Botón Principal */
+      .cta-main {
+        display: inline-block;
+        background: var(--brand-gradient);
+        color: #fff;
+        padding: 16px 40px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        box-shadow: 0 4px 25px rgba(236, 72, 153, 0.4);
+        transition: transform 0.2s;
+        border: none;
+        cursor: pointer;
+      }
+      .cta-main:hover {
+        transform: translateY(-3px);
+      }
+      .guarantee {
+        display: block;
+        margin-top: 15px;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      /* --- TEMARIO --- */
+      .syllabus-section {
+        padding-bottom: 100px;
+      }
+
+      .section-label {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 15px;
+        display: table;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .topic-grid {
+        display: grid;
+        gap: 20px;
+      }
+
+      .topic-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        background: var(--bg-card);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 25px;
+        border-radius: 16px;
+        transition: 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .topic-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(236, 72, 153, 0.3);
+        background: rgba(30, 41, 59, 0.8);
+      }
+
+      .topic-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        color: var(--accent);
+        flex-shrink: 0;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .topic-content h3 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .topic-content p {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        margin: 0;
+      }
+
+      /* Tags decorativos para conceptos clave */
+      .keyword-tag {
+        background: rgba(236, 72, 153, 0.15);
+        color: #f472b6;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 0.85em;
+      }
+
+      /* --- FOOTER FULL WIDTH --- */
+      .site-footer {
+        width: 100%;
+        background: #020617;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        color: var(--text-muted);
+        margin-top: auto;
+        position: relative;
+        z-index: 20;
+      }
+      .footer-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 80px 20px 40px 20px;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr 1fr 1.2fr;
+        gap: 40px;
+        margin-bottom: 60px;
+      }
+      .footer-col h4 {
+        color: #fff;
+        margin-bottom: 25px;
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+      .footer-col p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+      .footer-col ul li {
+        margin-bottom: 12px;
+      }
+      .footer-col ul li a {
+        transition: color 0.3s;
+        font-size: 0.95rem;
+        color: var(--text-muted);
+      }
+      .footer-col ul li a:hover {
+        color: var(--accent);
+      }
+      .social-icons {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+      .social-icons a {
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: #fff;
+        transition: 0.3s;
+      }
+      .social-icons a:hover {
+        background: var(--accent);
+      }
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 15px;
+        font-size: 0.95rem;
+      }
+      .contact-item i {
+        color: var(--accent);
+        width: 20px;
+      }
+      .footer-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .footer-form input,
+      .footer-form textarea {
+        width: 100%;
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: #fff;
+        font-family: inherit;
+        font-size: 0.9rem;
+      }
+      .footer-form input:focus,
+      .footer-form textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .submit-btn {
+        background: transparent;
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: 0.3s;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+      }
+      .submit-btn:hover {
+        background: var(--accent);
+        color: #fff;
+      }
+      .copyright {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        font-size: 0.85rem;
+        opacity: 0.6;
+      }
+
+      @media (max-width: 900px) {
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+          text-align: center;
+          gap: 50px;
+        }
+        .footer-col {
+          align-items: center;
+        }
+        .social-icons,
+        .contact-item {
+          justify-content: center;
+        }
+      }
+    </style>
   </head>
+
   <body>
-    <nav class="navbar" id="mainNavbar">
-      <div class="nav-brand">
-        <img src="/img/Logo.png" alt="Quintec Logo" />
-        <a href="index.html">Quintec Software</a>
-      </div>
+    <a href="index.html" class="back-home-btn">
+      <i class="fa-solid fa-arrow-left"></i> Inicio
+    </a>
 
-      <div class="nav-center">
-        <a href="index.html" class="nav-link">
-          <i class="fa-solid fa-laptop-code"></i> Inicio
-        </a>
-        <a href="index.html#retos" class="nav-link">
-          <i class="fa-solid fa-gamepad"></i> Retos
-        </a>
-        <a href="#contacto" class="nav-link">
-          <i class="fa-solid fa-envelope"></i> Contacto
-        </a>
-      </div>
-    </nav>
+    <div class="container">
+      <header class="course-header">
+        <span class="badge">NUEVO LANZAMIENTO</span>
+        <h1 class="hero-title">
+          Diseño UX/UI <br /><span class="text-gradient">Profesional</span>
+        </h1>
 
-    <header class="immersive-hero">
-      <div class="hero-content">
-        <div class="badge">NUEVO LANZAMIENTO</div>
-        <h1>Diseño UX/UI Profesional</h1>
         <p class="hero-desc">
           Aprende a diseñar experiencias digitales que enamoren a los usuarios.
           Domina Figma, los principios de diseño visual, prototipado y sistemas
           de diseño desde cero.
         </p>
 
-        <div class="meta-bar-simple">
-          <div class="instructor-mini">
-            <img src="/img/Instructor.jpeg" alt="Profesor" />
-            <div class="inst-text">
-              <span>Instructor</span>
-              <strong>Carlos Quintero</strong>
-            </div>
+        <div class="instructor-pill">
+          <img src="/img/Instructor.jpeg" alt="Instructor" />
+          <div class="inst-info">
+            <span>Instructor</span>
+            <strong>Carlos Quintero</strong>
           </div>
         </div>
 
-        <div class="action-area">
-          <button class="cta-button pulse-btn">INSCRIBIRME AL CURSO</button>
-          <span class="guarantee-text"
-            ><i class="fa-solid fa-shield-halved"></i> Acceso ilimitado al
+        <div>
+          <button class="cta-main">INSCRIBIRME AHORA</button>
+          <span class="guarantee"
+            ><i class="fa-solid fa-check"></i> Acceso ilimitado al
             contenido</span
           >
         </div>
-      </div>
-    </header>
+      </header>
 
-    <section class="course-body">
-      <div class="video-container-wide">
-        <div class="image-wrapper-static">
-          <img src="/img/UX-UI.png" alt="Curso UX UI Cover" />
+      <section class="syllabus-section">
+        <h2 class="section-label">Temario del Curso</h2>
 
-          <div class="glow-effect"></div>
-        </div>
-      </div>
-
-      <div class="roadmap-container">
-        <div class="playlist-header">
-          <h2>Temario del Curso</h2>
-          <span class="total-stats">Crea interfaces modernas e intuitivas</span>
-        </div>
-
-        <div class="topic-list">
+        <div class="topic-grid">
           <div class="topic-card">
-            <div class="topic-icon ux-fund-icon">
-              <i class="fa-solid fa-pen-nib"></i>
-            </div>
-            <div class="topic-info">
+            <div class="topic-icon"><i class="fa-solid fa-pen-nib"></i></div>
+            <div class="topic-content">
               <h3>Fundamentos de UX vs UI</h3>
               <p>
-                Entiende las diferencias clave. Aprende sobre Design Thinking,
-                empatía con el usuario y arquitectura de la información.
+                Entiende las diferencias clave. Aprende sobre
+                <span class="keyword-tag">Design Thinking</span>, empatía con el
+                usuario y arquitectura de la información.
               </p>
             </div>
           </div>
 
           <div class="topic-card">
-            <div class="topic-icon research-icon">
+            <div class="topic-icon">
               <i class="fa-solid fa-magnifying-glass-chart"></i>
             </div>
-            <div class="topic-info">
-              <h3>Investigación de Usuarios (UX Research)</h3>
+            <div class="topic-content">
+              <h3>Investigación de Usuarios</h3>
               <p>
-                Cómo crear User Personas, User Journeys y realizar pruebas de
-                usabilidad para validar tus ideas antes de diseñar.
+                Cómo crear <span class="keyword-tag">User Personas</span>, User
+                Journeys y realizar pruebas de usabilidad para validar tus ideas
+                antes de diseñar.
               </p>
             </div>
           </div>
 
           <div class="topic-card">
-            <div class="topic-icon figma-icon">
-              <i class="fa-brands fa-figma"></i>
-            </div>
-            <div class="topic-info">
-              <h3>Dominando Figma de 0 a Experto</h3>
+            <div class="topic-icon"><i class="fa-brands fa-figma"></i></div>
+            <div class="topic-content">
+              <h3>Dominando Figma</h3>
               <p>
-                Aprende la herramienta estándar de la industria. Frames,
-                Auto-layout, componentes, variantes y plugins esenciales.
+                Aprende la herramienta estándar.
+                <span class="keyword-tag">Auto-layout</span>, componentes,
+                variantes y plugins esenciales para ser más veloz.
               </p>
             </div>
           </div>
 
           <div class="topic-card">
-            <div class="topic-icon ui-icon">
-              <i class="fa-solid fa-palette"></i>
-            </div>
-            <div class="topic-info">
+            <div class="topic-icon"><i class="fa-solid fa-palette"></i></div>
+            <div class="topic-content">
               <h3>Diseño Visual y UI</h3>
               <p>
                 Teoría del color, tipografía, sistemas de grillas, espaciado y
-                jerarquía visual para crear interfaces hermosas.
+                jerarquía visual para crear interfaces hermosas y funcionales.
               </p>
             </div>
           </div>
 
           <div class="topic-card">
-            <div class="topic-icon proto-icon">
+            <div class="topic-icon">
               <i class="fa-solid fa-mobile-screen-button"></i>
             </div>
-            <div class="topic-info">
-              <h3>Prototipado y Wireframing</h3>
+            <div class="topic-content">
+              <h3>Prototipado</h3>
               <p>
                 Desde bocetos en papel (Lo-Fi) hasta prototipos interactivos de
-                alta fidelidad (Hi-Fi) con animaciones y micro-interacciones.
+                alta fidelidad (Hi-Fi) con
+                <span class="keyword-tag">Smart Animate</span>.
               </p>
             </div>
           </div>
 
           <div class="topic-card">
-            <div class="topic-icon system-icon">
-              <i class="fa-solid fa-cubes"></i>
-            </div>
-            <div class="topic-info">
-              <h3>Sistemas de Diseño (Design Systems)</h3>
+            <div class="topic-icon"><i class="fa-solid fa-cubes"></i></div>
+            <div class="topic-content">
+              <h3>Sistemas de Diseño</h3>
               <p>
-                Crea bibliotecas de componentes escalables (Atomic Design) y
-                aprende a entregar tu diseño a los desarrolladores (Hand-off).
+                Crea bibliotecas de componentes escalables (<span
+                  class="keyword-tag"
+                  >Atomic Design</span
+                >) y aprende a entregar tu diseño a desarrollo (Hand-off).
               </p>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
+    <footer class="site-footer" id="contacto">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>Quintec Software</h4>
+            <p style="color: var(--text-muted)">
+              Formando a la próxima generación de líderes digitales.
+            </p>
+            <div class="social-icons">
+              <!-- <a href="#"><i class="fa-brands fa-instagram"></i></a> -->
+              <a href="https://github.com/carlosqtro"
+                ><i class="fa-brands fa-github"></i
+              ></a>
+              <!-- <a href="#"><i class="fa-brands fa-linkedin-in"></i></a> -->
+            </div>
+          </div>
 
-    <footer class="modern-footer" id="contacto">
-      <div class="footer-container">
-        <div class="footer-col brand-col">
-          <h3>Quintec Software<span class="dot">.</span></h3>
-          <p>
-            Formando a la próxima generación de líderes digitales con tecnología
-            de vanguardia.
-          </p>
+          <div class="footer-col">
+            <h4>Explorar</h4>
+            <ul>
+              <li><a href="#cursos">Cursos</a></li>
+              <li><a href="#retos">Retos</a></li>
+              <!-- <li><a href="precios.html">Ver Precios</a></li> -->
+            </ul>
+          </div>
 
-          <div class="contact-data">
+          <div class="footer-col">
+            <h4>Contacto</h4>
             <div class="contact-item">
               <i class="fa-solid fa-envelope"></i>
               <span>quintecsoftware@gmail.com</span>
@@ -177,54 +552,37 @@
               <i class="fa-brands fa-whatsapp"></i>
               <span>+598 99 329 168</span>
             </div>
-          </div>
-
-          <div class="social-icons">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-github"></i></a>
-          </div>
-        </div>
-
-        <div class="footer-col links-col">
-          <h4>Explorar</h4>
-          <ul>
-            <li><a href="index.html#cursos">Cursos</a></li>
-            <li><a href="index.html#retos">Retos & Juegos</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col form-col">
-          <h4>Envíanos un mensaje</h4>
-          <form
-            id="contactForm"
-            action="https://submit-form.com/23QjgD05b"
-            class="footer-form">
-            <div class="input-group">
-              <input type="text" name="name" placeholder="Tu Nombre" required />
+            <div class="contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Montevideo, Uruguay</span>
             </div>
-            <div class="input-group">
+          </div>
+
+          <div class="footer-col">
+            <h4>Escríbenos</h4>
+            <form
+              id="contactForm"
+              action="https://submit-form.com/23QjgD05b"
+              class="footer-form">
+              <input type="text" name="name" placeholder="Tu Nombre" required />
               <input
                 type="email"
                 name="email"
                 placeholder="Tu Email"
                 required />
-            </div>
-            <div class="input-group">
               <textarea
                 name="message"
-                rows="3"
-                placeholder="Escribe tu consulta..."
+                rows="2"
+                placeholder="Mensaje..."
                 required></textarea>
-            </div>
-            <button type="submit" class="submit-btn">
-              ENVIAR MENSAJE <i class="fa-solid fa-paper-plane"></i>
-            </button>
-          </form>
+              <button type="submit" class="submit-btn">ENVIAR MENSAJE</button>
+            </form>
+          </div>
         </div>
-      </div>
 
-      <div class="footer-bottom">
-        <p>&copy; 2023 Quintec Software. Todos los derechos reservados.</p>
+        <div class="copyright">
+          &copy; 2026 Quintec Software. Todos los derechos reservados.
+        </div>
       </div>
     </footer>
 
